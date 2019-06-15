@@ -19,10 +19,11 @@ def check_every_subfolders(path):
     for x in path:
         try:
             os.chdir(x)
-            a = [y for y in os.listdir(x) if os.path.isdir(y)]
         except PermissionError as e:
             print('PermissionError:',e)
             continue
+        else:
+            a = [y for y in os.listdir(x) if os.path.isdir(y)]
         if len(a) == 0:
             continue
         else:

@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # -*- coding:utf-8 -*-
 
-import os, sys, multiprocessing
+import os, sys
 
 def main(path,name,logfile = 0):
-    a = path.split(';')#如果要键入的目标路径为复数，则在目标路径之间用分隔符;分割
+    a = [path]
     b = a
     while len(a) != 0:
         c = a
@@ -59,7 +59,7 @@ def filter_files(path,keyname):
 
 
 if __name__ == "__main__":
-    path = input('please enter aim path:')
+    path = input('please press target path:\n')
     path = os.path.abspath(path)
-    keyname = input('please enter the file`s name you want to find out:')
+    keyname = input('please press the name of the file you want to find out:\n')
     main(path,keyname)

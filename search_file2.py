@@ -32,7 +32,7 @@ def filter_files(path,keyname):
 
             #print(os.path.join(b,x))
 
-def recursion_directories(path):#输入一个含有目标路径的列表，输出所有目标路径的下的子目录绝对路径
+def recursion_directories(path):#输入一个含有目标路径的列表，输出目标路径的下所有的子目录绝对路径
     l = []
     for x in path:
         os.chdir(x)

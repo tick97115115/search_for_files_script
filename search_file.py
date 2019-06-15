@@ -19,11 +19,10 @@ def check_every_subfolders(path):
     for x in path:
         try:
             os.chdir(x)
+            a = [y for y in os.listdir(x) if os.path.isdir(y)]
         except PermissionError as e:
             print('PermissionError:',e)
             continue
-        else:
-            a = [y for y in os.listdir(x) if os.path.isdir(y)]
         if len(a) == 0:
             continue
         else:
@@ -32,27 +31,31 @@ def check_every_subfolders(path):
     return l
 
 def filter_files(path,keyname):
-    os.chdir(path)
-    l = len(keyname)
-    a = [x for x in os.listdir('.') if os.path.isfile(x)]
-    for x in a:
-        n = 0
-        m = len(x) - l
-        if m < 0:
-            continue
-        elif m == 0:
-            if keyname == x:
-                print(os.path.join(path,x))
-            else:
+    try:
+        os.chdir(path)
+        l = len(keyname)
+        a = [x for x in os.listdir('.') if os.path.isfile(x)]
+    except PermissionError as e:
+        print('PermissionError:',e)
+    else:
+        for x in a:
+            n = 0
+            m = len(x) - l
+            if m < 0:
                 continue
-        else:
-            for y in x:
-                if n > m:
+            elif m == 0:
+                if keyname == x:
+                    print(os.path.join(path,x))
+                else:
                     continue
-                if y == keyname[0]:
-                    if keyname == x[n:n+l]:
-                        print(os.path.join(path,x))
-                n = n + 1
+            else:
+                for y in x:
+                    if n > m:
+                        continue
+                    if y == keyname[0]:
+                        if keyname == x[n:n+l]:
+                            print(os.path.join(path,x))
+                    n = n + 1
 
 
 if __name__ == "__main__":
